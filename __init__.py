@@ -2,6 +2,7 @@ from ovos_bus_client.session import SessionManager
 from ovos_solver_openai_persona import OpenAIPersonaSolver
 from ovos_utils import classproperty
 from ovos_utils.process_utils import RuntimeRequirements
+from ovos_workshop.decorators import intent_handler
 from ovos_workshop.skills.fallback import FallbackSkill
 
 
@@ -28,7 +29,7 @@ class ChatGPTSkill(FallbackSkill):
         self.add_event("recognizer_loop:utterance", self.handle_utterance)
         self.register_fallback(self.ask_chatgpt, 85)
         
-    @intent_file_handler('ask.chatgpt.intent')
+    @intent_handler('ask.chatgpt.intent')
     def handle_chatgpt(self, message):
         self.ask_chatgpt(message)
 
