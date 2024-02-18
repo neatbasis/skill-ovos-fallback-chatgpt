@@ -27,6 +27,10 @@ class ChatGPTSkill(FallbackSkill):
         self.add_event("speak", self.handle_speak)
         self.add_event("recognizer_loop:utterance", self.handle_utterance)
         self.register_fallback(self.ask_chatgpt, 85)
+        
+    @intent_file_handler('ask.chatgpt.intent')
+    def handle_chatgpt(self, message):
+        self.ask_chatgpt(message)
 
     @property
     def chat(self):
